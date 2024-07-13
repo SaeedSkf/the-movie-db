@@ -1,5 +1,5 @@
 //
-//  MovieListCoordinator.swift
+//  MovieDetailsCoordinator.swift
 //  themoviedb
 //
 //  Created by Saeed on 7/13/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieListCoordinator: Coordinator {
+final class MovieDetailsCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
@@ -17,15 +17,9 @@ final class MovieListCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = MovieListViewController()
-        viewController.viewModel = MovieListViewModel()
+        let viewController = MovieDetailViewController()
+        viewController.viewModel = MovieDetailViewModel()
         navigationController.pushViewController(viewController, animated: false)
-    }
-    
-    func showMovieDetail(movie: Movie) {
-        let coordinator = MovieDetailsCoordinator(navigationController: navigationController)
-        childCoordinators.append(coordinator)
-        coordinator.start()
     }
 
     func didFinish() {

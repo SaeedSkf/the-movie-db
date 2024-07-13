@@ -8,6 +8,6 @@
 import UIKit
 
 final class MovieListViewController: BaseViewController {
-    
+    var viewModel: MovieListViewModel!
 }
 
