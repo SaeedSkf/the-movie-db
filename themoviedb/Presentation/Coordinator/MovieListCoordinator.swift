@@ -8,27 +8,27 @@
 import UIKit
 
 final class MovieListCoordinator: Coordinator {
-    var navigationController: UINavigationController
+    private let router: Router
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(router: Router) {
+        self.router = router
     }
 
     func start() {
         let viewController = MovieListViewController()
         viewController.viewModel = MovieListViewModel()
-        navigationController.pushViewController(viewController, animated: false)
+        viewController.routerDelegate = self
+        router.push(viewController, animated: true)
     }
-    
-    func showMovieDetail(movie: Movie) {
-        let coordinator = MovieDetailsCoordinator(navigationController: navigationController)
+}
+
+extension MovieListCoordinator: MovieListViewControllerRouterDelegate {
+    func showMovieDetail() {
+        let coordinator = MovieDetailCoordinator(router: router)
+        coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
-    }
-
-    func didFinish() {
-        parentCoordinator?.childDidFinish(self)
     }
 }
