@@ -10,38 +10,57 @@ import Combine
 
 final class MovieListViewModel: BaseViewModel {
     private let fetchMovieListUseCase: FetchMovieListUseCase
+    
+    private var currentPage = 1
+    private var isEndOfPages = false
+    
+    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var updateTable: Void = ()
+    
+    private(set) var movies: [Movie] = [] {
+        didSet {
+            updateTable = ()
+        }
+    }
+    
     var cancellables = Set<AnyCancellable>()
     
     init(fetchMovieListUseCase: FetchMovieListUseCase) {
         self.fetchMovieListUseCase = fetchMovieListUseCase
     }
     
-    func fetchMovies() {
-        fetchMovieListUseCase.execute(page: 1)
-            .receive(on: RunLoop.main)
-            .sinkToResult { result in
+    private func fetchMovies(page: Int, completion: @escaping ([Movie])->Void) {
+        guard !isLoading, !isEndOfPages else {
+            return
+        }
+        
+        isLoading = true
+        fetchMovieListUseCase.execute(page: page)
+            .sinkToResult { [weak self] result in
+                self?.isLoading = false
                 switch result {
-                case .success(let success):
-                    print(success)
+                case .success(let data):
+                    self?.isEndOfPages = data.isEndOfPage
+                    completion(data.result)
                 case .failure(let failure):
                     print(failure)
                 }
             }
             .store(in: &cancellables)
     }
-}
-
-
-extension Publisher {
-    func sinkToResult(_ result: @escaping (Result<Output, Failure>) -> Void) -> AnyCancellable {
-        return sink(receiveCompletion: { completion in
-            switch completion {
-            case let .failure(error):
-                result(.failure(error))
-            default: break
-            }
-        }, receiveValue: { value in
-            result(.success(value))
-        })
+    
+    func fetchFirstPage() {
+        fetchMovies(page: 1) { [weak self] movies in
+            self?.currentPage = 1
+            self?.movies = movies
+        }
+    }
+    
+    func fetchNextPage() {
+        let page = currentPage + 1
+        fetchMovies(page: page) { [weak self] movies in
+            self?.currentPage = page
+            self?.movies.append(contentsOf: movies)
+        }
     }
 }
