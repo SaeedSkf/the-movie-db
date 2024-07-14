@@ -27,10 +27,11 @@ struct RemoteMovieRepository: MovieRepository {
                     result: pager.results.map { dto in
                         Movie(
                             id: dto.id,
-                            title: dto.title,
-                            poster: URL(string: "https://api.themoviedb.org\(dto.posterPath)"),
+                            title: dto.title ?? "unkown",
+                            poster: URL(string: "https://image.tmdb.org/t/p/w500_and_h200_face/\(dto.posterPath ?? "defaultImage.jpg")"),
+                            thumbnail: URL(string: "https://image.tmdb.org/t/p/w50_and_h50_face/\(dto.posterPath ?? "defaultImage.jpg")"),
                             releaseDate: Date(),
-                            desctiption: dto.overview
+                            desctiption: dto.overview ?? "unkown"
                         )
                     }
                 )
