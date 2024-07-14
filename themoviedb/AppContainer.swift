@@ -27,6 +27,7 @@ final class AppContainer {
             [
                 AppAssembly(),
                 MovieListAssembly(),
+                MovieDetailAssembly()
             ],
             container: container
         )
