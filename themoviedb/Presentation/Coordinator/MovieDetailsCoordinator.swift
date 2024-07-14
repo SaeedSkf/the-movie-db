@@ -22,7 +22,8 @@ final class MovieDetailCoordinator: Coordinator {
         let viewController = MovieDetailViewController()
         viewController.viewModel = AppContainer.resolver.resolve(MovieDetailViewModel.self, argument: movie)
         viewController.routerDelegate = self
-        router.push(viewController, animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        router.present(viewController, animated: true, completion: nil)
     }
 
     func didFinish() {
@@ -32,7 +33,8 @@ final class MovieDetailCoordinator: Coordinator {
 
 extension MovieDetailCoordinator: MovieDetailViewControllerRouterDelegate {
     func back() {
-        router.pop(animated: true)
-        didFinish()
+        router.dismiss(animated: true) { [weak self] in
+            self?.didFinish()
+        }
     }
 }

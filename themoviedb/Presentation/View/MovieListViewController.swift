@@ -79,6 +79,11 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: movie)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = viewModel.movies[indexPath.row]
+        routerDelegate?.showMovieDetail(movie: movie)
+    }
 }
 
 
