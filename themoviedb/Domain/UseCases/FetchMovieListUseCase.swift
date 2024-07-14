@@ -1,18 +1,18 @@
 //
-//  FetchMovieUseCase.swift
+//  FetchMovieListUseCase.swift
 //  themoviedb
 //
-//  Created by Saeed on 7/13/24.
+//  Created by Saeed on 7/14/24.
 //
 
 import Foundation
 import Combine
 
-protocol FetchMovieUseCase {
+protocol FetchMovieListUseCase {
     func execute(query: String) -> AnyPublisher<[Movie], APIError>
 }
 
-struct BaseFetchMovieUseCase: FetchMovieUseCase {
+struct BaseFetchMovieListUseCase: FetchMovieListUseCase {
     private let movieRepository: MovieRepository
 
     init(movieRepository: MovieRepository) {

@@ -8,4 +8,9 @@
 import UIKit
 
 final class MovieListViewModel: BaseViewModel {
+    private let fetchMovieListUseCase: FetchMovieListUseCase
+    
+    init(fetchMovieListUseCase: FetchMovieListUseCase) {
+        self.fetchMovieListUseCase = fetchMovieListUseCase
+    }
 }
