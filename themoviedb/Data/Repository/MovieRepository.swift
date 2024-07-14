@@ -28,7 +28,7 @@ struct RemoteMovieRepository: MovieRepository {
                         Movie(
                             id: dto.id,
                             title: dto.title,
-                            poster: URL(string: dto.posterPath),
+                            poster: URL(string: "https://api.themoviedb.org\(dto.posterPath)"),
                             releaseDate: Date(),
                             desctiption: dto.overview
                         )
