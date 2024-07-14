@@ -28,8 +28,8 @@ struct RemoteMovieRepository: MovieRepository {
                         Movie(
                             id: dto.id,
                             title: dto.title ?? "unkown",
-                            poster: URL(string: "https://image.tmdb.org/t/p/w500_and_h200_face/\(dto.posterPath ?? "defaultImage.jpg")"),
-                            thumbnail: URL(string: "https://image.tmdb.org/t/p/w50_and_h50_face/\(dto.posterPath ?? "defaultImage.jpg")"),
+                            poster: URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(dto.posterPath ?? "defaultImage.jpg")"),
+                            thumbnail: URL(string: "https://image.tmdb.org/t/p/w50_and_h50_face\(dto.posterPath ?? "defaultImage.jpg")"),
                             releaseDate: Date(),
                             desctiption: dto.overview ?? "unkown"
                         )

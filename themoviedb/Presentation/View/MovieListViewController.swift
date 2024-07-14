@@ -32,16 +32,20 @@ final class MovieListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = tableView
-        self.title = "Search"
-        // Just a simple way to show data is loading ;)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
         
+        setupViews()
         bindViewModel()
         viewModel.fetchFirstPage()
     }
     
-    func bindViewModel() {
+    private func setupViews() {
+        self.view = tableView
+        self.title = "Search"
+        // Just a simple way to show data is loading ;)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+    }
+    
+    private func bindViewModel() {
         viewModel.$isLoading
             .sink { [weak self] isLoading in
                 if isLoading {
