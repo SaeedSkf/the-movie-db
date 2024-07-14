@@ -10,13 +10,9 @@ import Swinject
 import Alamofire
 
 final class MovieDetailAssembly: Assembly {
-    func assemble(container: Container) {
-        container.register(FetchMovieUseCase.self) { res in
-            BaseFetchMovieUseCase(movieRepository: res.resolve(MovieRepository.self)!)
-        }
-        
+    func assemble(container: Container) {        
         container.register(MovieDetailViewModel.self) { res, movie in
-            MovieDetailViewModel(movie: movie, fetchMovieUseCase: res.resolve(FetchMovieUseCase.self)!)
+            MovieDetailViewModel(movie: movie)
         }
     }
 }
