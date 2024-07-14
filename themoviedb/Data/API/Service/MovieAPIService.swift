@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol MovieAPIService {
-    func fetchMovies(query: String) -> AnyPublisher<[MovieDTO], APIError>
+    func fetchMovies(page: Int) -> AnyPublisher<PagerContainerDTO<MovieDTO>, APIError>
 }
 
 struct BaseMovieAPIService: MovieAPIService {
@@ -19,7 +19,7 @@ struct BaseMovieAPIService: MovieAPIService {
         self.client = client
     }
     
-    func fetchMovies(query: String) -> AnyPublisher<[MovieDTO], APIError> {
-        client.request(TMDBEndpoint.fetchMovies)
+    func fetchMovies(page: Int) -> AnyPublisher<PagerContainerDTO<MovieDTO>, APIError> {
+        client.request(TMDBEndpoint.fetchMovies(page: page))
     }
 }

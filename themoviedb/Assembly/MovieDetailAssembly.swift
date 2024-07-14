@@ -15,8 +15,8 @@ final class MovieDetailAssembly: Assembly {
             BaseFetchMovieUseCase(movieRepository: res.resolve(MovieRepository.self)!)
         }
         
-        container.register(MovieDetailViewModel.self) { res in
-            MovieDetailViewModel(fetchMovieUseCase: res.resolve(FetchMovieUseCase.self)!)
+        container.register(MovieDetailViewModel.self) { res, movie in
+            MovieDetailViewModel(movie: movie, fetchMovieUseCase: res.resolve(FetchMovieUseCase.self)!)
         }
     }
 }

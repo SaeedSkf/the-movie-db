@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FetchMovieUseCase {
-    func execute(query: String) -> AnyPublisher<[Movie], APIError>
+    func execute(page: Int) -> AnyPublisher<Pager<Movie>, APIError>
 }
 
 struct BaseFetchMovieUseCase: FetchMovieUseCase {
@@ -19,7 +19,7 @@ struct BaseFetchMovieUseCase: FetchMovieUseCase {
         self.movieRepository = movieRepository
     }
 
-    func execute(query: String) -> AnyPublisher<[Movie], APIError> {
-        movieRepository.fetchMovies(query: query)
+    func execute(page: Int) -> AnyPublisher<Pager<Movie>, APIError> {
+        movieRepository.fetchMovies(page: page)
     }
 }

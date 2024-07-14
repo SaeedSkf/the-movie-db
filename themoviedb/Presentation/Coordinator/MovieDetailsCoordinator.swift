@@ -11,14 +11,16 @@ final class MovieDetailCoordinator: Coordinator {
     private let router: Router
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
+    let movie: Movie
 
-    init(router: Router) {
+    init(movie: Movie, router: Router) {
+        self.movie = movie
         self.router = router
     }
 
     func start() {
         let viewController = MovieDetailViewController()
-        viewController.viewModel = MovieDetailViewModel()
+        viewController.viewModel = AppContainer.resolver.resolve(MovieDetailViewModel.self, argument: movie)
         viewController.routerDelegate = self
         router.push(viewController, animated: true)
     }

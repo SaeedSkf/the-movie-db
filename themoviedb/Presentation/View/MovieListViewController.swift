@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MovieListViewControllerRouterDelegate: AnyObject {
-    func showMovieDetail()
+    func showMovieDetail(movie: Movie)
 }
 
 final class MovieListViewController: BaseViewController {
@@ -19,6 +19,7 @@ final class MovieListViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .red
         addButton()
+        viewModel.fetchMovies()
     }
     
     func addButton() {
@@ -29,7 +30,9 @@ final class MovieListViewController: BaseViewController {
     }
     
     @objc func buttonTapped() {
-        routerDelegate?.showMovieDetail()
+//        let mock = Movie(id: 1, title: "", poster: nil, releaseDate: Date(), desctiption: "")
+//        routerDelegate?.showMovieDetail(movie: mock)
+        viewModel.fetchMovies()
     }
     
 }

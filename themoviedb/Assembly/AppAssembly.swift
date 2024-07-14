@@ -12,6 +12,7 @@ import Alamofire
 final class AppAssembly: Assembly {
     func assemble(container: Container) {
         container.register(Session.self) { res in
+            // You can pass interceptor for handle refresh token and ... to the session object
             Session()
         }
         

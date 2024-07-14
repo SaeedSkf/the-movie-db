@@ -18,15 +18,15 @@ final class MovieListCoordinator: Coordinator {
 
     func start() {
         let viewController = MovieListViewController()
-        viewController.viewModel = MovieListViewModel()
+        viewController.viewModel = AppContainer.resolve()
         viewController.routerDelegate = self
         router.push(viewController, animated: true)
     }
 }
 
 extension MovieListCoordinator: MovieListViewControllerRouterDelegate {
-    func showMovieDetail() {
-        let coordinator = MovieDetailCoordinator(router: router)
+    func showMovieDetail(movie: Movie) {
+        let coordinator = MovieDetailCoordinator(movie: movie, router: router)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()

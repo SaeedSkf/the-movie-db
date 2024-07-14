@@ -13,7 +13,7 @@ protocol Endpoint {
 }
 
 enum TMDBEndpoint: Endpoint {
-    case fetchMovies
+    case fetchMovies(page: Int)
     case refreshToken(refreshToken: String)
     
     var baseURLString: String {
@@ -22,8 +22,8 @@ enum TMDBEndpoint: Endpoint {
 
     var path: String {
         switch self {
-        case .fetchMovies:
-            return "3/movie/popular"
+        case .fetchMovies(let page):
+            return "3/discover/movie?include_adult=false&include_video=false&language=en-US&page=\(page)&sort_by=popularity.desc"
         case .refreshToken:
             return "3/auth/refresh"
         }
@@ -39,7 +39,11 @@ enum TMDBEndpoint: Endpoint {
     }
     
     var headers: [String: String] {
-        ["Content-Type": "application/json; charset=UTF-8"]
+        [
+            "Content-Type": "application/json; charset=UTF-8",
+            "accept": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMTU2MDE1OWNmYWM3ZTcwMzcyOGIxMmNiOTE3MzBhZiIsIm5iZiI6MTcyMDg3NDg4NS4yMzc2MTYsInN1YiI6IjY2OTI3NmMwMWVkOTIxZDYzNWUyODJhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f_8NGMOLSK9Vg6fzayOgVVnEkwRXsSOgtcrxB2GbQLI"
+        ]
     }
     
     var params: [String: Any] {

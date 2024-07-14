@@ -43,6 +43,8 @@
 		30192B562C435E16006F62DF /* MovieListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30192B552C435E16006F62DF /* MovieListAssembly.swift */; };
 		30192B582C43620B006F62DF /* MovieDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30192B572C43620B006F62DF /* MovieDetailAssembly.swift */; };
 		30192B5A2C436251006F62DF /* FetchMovieListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30192B592C436251006F62DF /* FetchMovieListUseCase.swift */; };
+		30192B5C2C43726B006F62DF /* PagerContainerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30192B5B2C43726A006F62DF /* PagerContainerDTO.swift */; };
+		30192B5E2C4373A9006F62DF /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30192B5D2C4373A9006F62DF /* Pager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		30192B552C435E16006F62DF /* MovieListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListAssembly.swift; sourceTree = "<group>"; };
 		30192B572C43620B006F62DF /* MovieDetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailAssembly.swift; sourceTree = "<group>"; };
 		30192B592C436251006F62DF /* FetchMovieListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieListUseCase.swift; sourceTree = "<group>"; };
+		30192B5B2C43726A006F62DF /* PagerContainerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerContainerDTO.swift; sourceTree = "<group>"; };
+		30192B5D2C4373A9006F62DF /* Pager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				30192B3B2C428030006F62DF /* Movie.swift */,
+				30192B5D2C4373A9006F62DF /* Pager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				30192B442C42AB88006F62DF /* MovieDTO.swift */,
+				30192B5B2C43726A006F62DF /* PagerContainerDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -489,10 +495,12 @@
 				30192B152C3F3D26006F62DF /* AppCoordinator.swift in Sources */,
 				30192B542C435E05006F62DF /* AppAssembly.swift in Sources */,
 				30192B362C427F2B006F62DF /* MovieDetailsCoordinator.swift in Sources */,
+				30192B5C2C43726B006F62DF /* PagerContainerDTO.swift in Sources */,
 				30192B322C427D91006F62DF /* BaseViewController.swift in Sources */,
 				30192B2A2C42775D006F62DF /* MovieListCoordinator.swift in Sources */,
 				30192B422C42AB47006F62DF /* MovieAPIService.swift in Sources */,
 				30192B302C427D60006F62DF /* MovieListViewController.swift in Sources */,
+				30192B5E2C4373A9006F62DF /* Pager.swift in Sources */,
 				30192B512C435DAE006F62DF /* AppContainer.swift in Sources */,
 				30192ADA2C3F3298006F62DF /* AppDelegate.swift in Sources */,
 				30192B452C42AB88006F62DF /* MovieDTO.swift in Sources */,

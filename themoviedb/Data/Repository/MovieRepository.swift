@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol MovieRepository {
-    func fetchMovies(query: String) -> AnyPublisher<[Movie], APIError>
+    func fetchMovies(page: Int) -> AnyPublisher<Pager<Movie>, APIError>
 }
 
 struct RemoteMovieRepository: MovieRepository {
@@ -19,19 +19,22 @@ struct RemoteMovieRepository: MovieRepository {
         self.service = service
     }
     
-    func fetchMovies(query: String) -> AnyPublisher<[Movie], APIError> {
-        service.fetchMovies(query: query)
-            .map { dtos in
-                dtos.map { dto in
-                    Movie(
-                        id: dto.id,
-                        title: dto.title,
-                        poster: URL(string: dto.posterPath),
-                        releaseDate: Date(),
-                        desctiption: dto.overview
-                    )
-                }
-            }
+    func fetchMovies(page: Int) -> AnyPublisher<Pager<Movie>, APIError> {
+        service.fetchMovies(page: page)
+            .map({ pager in
+                Pager<Movie>(
+                    isEndOfPage: pager.page == pager.totalPages,
+                    result: pager.results.map { dto in
+                        Movie(
+                            id: dto.id,
+                            title: dto.title,
+                            poster: URL(string: dto.posterPath),
+                            releaseDate: Date(),
+                            desctiption: dto.overview
+                        )
+                    }
+                )
+            })
             .eraseToAnyPublisher()
     }
 }
